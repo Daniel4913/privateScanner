@@ -8,9 +8,6 @@ OCR process happen fully locally on your device.
 Copy all extracted text
 Copy row of text
 
-http://swiadomewydatki.pl/device-2023-08-14-120822.webm
-
-
 [Obejrzyj wideo](
 http://swiadomewydatki.pl/device-2023-08-14-120822.webm
 )
