@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.myocr.mlkit.GraphicOverlay android:id="@+id/graphic_overlay"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
