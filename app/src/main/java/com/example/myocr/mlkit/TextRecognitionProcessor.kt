@@ -58,7 +58,8 @@ class TextRecognitionProcessor(
 //                showLanguageTag,
 //                showConfidence
                 false,
-                false
+                false,
+                onElementClicked = {}
             )
         )
     }

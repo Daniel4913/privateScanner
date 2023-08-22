@@ -19,6 +19,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +41,10 @@ import com.example.myocr.mlkit.TextRecognitionProcessor
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 
 @Composable
-fun TextRecognitionOverlay(chosenImage: ImageData) {
+fun TextRecognitionOverlay(
+    chosenImage: ImageData,
+    clickedText: (String) -> Unit
+) {
     val context = LocalContext.current
     val imageProcessor =
         TextRecognitionProcessor(context, TextRecognizerOptions.Builder().build())
@@ -48,6 +52,15 @@ fun TextRecognitionOverlay(chosenImage: ImageData) {
     val imageBitmap = remember(chosenImage.imageUri) {
         BitmapUtils.getBitmapFromContentUri(context.contentResolver, chosenImage.imageUri)
     }
+
+    val clickedTextState = remember { mutableStateOf<String?>(null) }
+
+    graphicOverlay.setOnTextClickListener { clickedText ->
+        clickedTextState.value = clickedText
+        Log.d("Composable", clickedText)
+        clickedText(clickedText)
+    }
+
 
     Box(
         modifier = Modifier

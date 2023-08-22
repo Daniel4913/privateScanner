@@ -39,6 +39,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -80,15 +81,7 @@ import com.example.myocr.components.ExtractedInformationFields
 import com.example.myocr.components.GraphicManager
 import com.example.myocr.components.ImageData
 import com.example.myocr.components.TextRecognitionOverlay
-import com.example.myocr.mlkit.BitmapUtils
-import com.example.myocr.mlkit.GraphicOverlay
-import com.example.myocr.mlkit.TextRecognitionProcessor
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.Text
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -117,11 +110,11 @@ fun HomeScreen(
         }
     )
     Scaffold(
-        modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+//        modifier = Modifier
+//            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
-                scrollBehavior = scrollBehavior,
+//                scrollBehavior = scrollBehavior,
                 title = { Text(text = "Private Scanner") },
                 modifier = Modifier,
                 navigationIcon = {
@@ -158,7 +151,6 @@ fun HomeScreen(
                     .padding(end = padding.calculateEndPadding(LayoutDirection.Ltr)),
                 onClick = {
                     filePicker.launch("image/*")
-
                 },
             ) {
                 Icon(
@@ -168,22 +160,61 @@ fun HomeScreen(
             }
         },
         content = {
+            var name by remember { mutableStateOf("") }
             Column(
-                modifier = Modifier
-                    .verticalScroll(scrollState)
-                    .fillMaxSize()
-                    .padding(top = it.calculateTopPadding()),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxSize()
             ) {
-                if (chosenImage != null) {
-                    TextRecognitionOverlay(chosenImage = chosenImage)
-                }
-                ExtractedInformationFields()
-            }
+                Box(
+                    modifier = Modifier
+                        .padding(top = it.calculateTopPadding())
+                        .height(300.dp)
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    if (chosenImage != null) {
+                        TextRecognitionOverlay(
+                            chosenImage = chosenImage,
+                            clickedText = { clickedText ->
+                                name = clickedText
+                            })
+                    } else {
 
+                    }
+                }
+                ExtractedInformationFields(name)
+
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    val itemsCount = 50
+                    items(itemsCount) { index ->
+                        Text(
+                            text = "Element $index",
+                            modifier = Modifier.padding(8.dp),
+                            color = Color.White
+                        )
+                    }
+
+                    //
+
+//            Column(
+//                modifier = Modifier
+//                    .verticalScroll(scrollState)
+//                    .fillMaxSize()
+//                    .padding(top = it.calculateTopPadding()),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                if (chosenImage != null) {
+//                    TextRecognitionOverlay(chosenImage = chosenImage)
+//                }
+//                ExtractedInformationFields()
+//            }
+
+
+                }
+            }
         }
     )
 }
-
 
 

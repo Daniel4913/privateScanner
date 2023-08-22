@@ -18,7 +18,8 @@ constructor(
     private val text: Text,
     private val shouldGroupTextInBlocks: Boolean,
     private val showLanguageTag: Boolean,
-    private val showConfidence: Boolean
+    private val showConfidence: Boolean,
+    onElementClicked: (String) -> Unit
 ) : GraphicOverlay.Graphic(overlay) {
 
     private val rectPaint: Paint = Paint()
@@ -40,12 +41,6 @@ constructor(
         labelPaint.style = Paint.Style.FILL
         // Redraw the overlay, as this graphic has been added.
         postInvalidate()
-        overlay?.setOnClickListener(GraphicOverlay.OnClickListener {
-            Log.d(
-                "KLIKED",
-                "klikniety "
-            )
-        })
     }
 
     /** Draws the text block annotations for position, size, and raw value on the supplied canvas. */
@@ -121,14 +116,8 @@ constructor(
     }
 
     private fun drawText(text: String, rect: RectF, textHeight: Float, canvas: Canvas) {
-        text.forEach {
-            overlay?.setOnClickListener(GraphicOverlay.OnClickListener {
-                Log.d(
-                    "KLIKED",
-                    "klikniety ${it} "
-                )
-            })
-        }
+
+
         // If the image is flipped, the left will be translated to right, and the right to left.
         val x0 = translateX(rect.left)
         val x1 = translateX(rect.right)
@@ -147,12 +136,6 @@ constructor(
         )
         // Renders the text at the bottom of the box.
         canvas.drawText(text, rect.left, rect.top - STROKE_WIDTH, textPaint)
-        overlay?.setOnClickListener(GraphicOverlay.OnClickListener {
-            Log.d(
-                "KLIKED",
-                "klikniety ${text} "
-            )
-        })
         clickableAreas[rect] = text
     }
 

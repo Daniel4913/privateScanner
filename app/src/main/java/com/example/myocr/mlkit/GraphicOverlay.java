@@ -61,20 +61,16 @@ public class GraphicOverlay extends View {
     private boolean isImageFlipped;
     private boolean needUpdateTransformation = true;
 
-    ////////////////////////////////////
-    // Interfejs słuchacza kliknięć
-    public interface OnClickListener {
-        void onClick();
+    ///////
+
+    public interface OnTextClickListener{
+        void onTextClick(String clickedText);
     }
 
-    // Zmienna przechowująca słuchacza kliknięć
-    private OnClickListener onClickListener;
+    private OnTextClickListener onTextClickListener;
 
-
-    // Metoda do ustawiania słuchacza kliknięć
-    public void setOnClickListener(OnClickListener listener) {
-        this.onClickListener = listener;
-
+    public void setOnTextClickListener(OnTextClickListener listener) {
+        this.onTextClickListener = listener;
     }
 
     @Override
@@ -89,6 +85,9 @@ public class GraphicOverlay extends View {
                     String clickedText = textGraphic.getClickedText(x, y);
                     if (clickedText != null) {
                         Log.d("KLIKED", "klikniety " + clickedText);
+                        if (onTextClickListener != null) {
+                            onTextClickListener.onTextClick(clickedText);
+                        }
                         return true;
                     }
                 }

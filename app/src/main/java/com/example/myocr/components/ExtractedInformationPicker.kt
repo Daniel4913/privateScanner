@@ -54,7 +54,7 @@ fun ExtractedInformationPicker(
     Column {
         Row(
             modifier = Modifier
-                //            .padding(8.dp)
+
                 .fillMaxWidth()
                 .background(Color.White),
             verticalAlignment = Alignment.CenterVertically,
@@ -66,13 +66,7 @@ fun ExtractedInformationPicker(
                 onValueChange = onNameChanged,
                 placeholder = { Text(text = "Product name") },
                 colors = TextFieldDefaults.colors(
-                    //                focusedContainerColor = Color.Transparent,
-                    //                unfocusedContainerColor = Color.Transparent,
-                    //                disabledContainerColor = Color.Transparent,
-                    //                focusedIndicatorColor = Color.Unspecified,
-                    //                unfocusedIndicatorColor = Color.Unspecified,
-                    //                disabledIndicatorColor = Color.Unspecified,
-                    unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                           unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                 ), keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next
                 ),
@@ -92,13 +86,7 @@ fun ExtractedInformationPicker(
                     onValueChange = onNameChanged,
                     placeholder = { Text(text = "pcs") },
                     colors = TextFieldDefaults.colors(
-                        //                focusedContainerColor = Color.Transparent,
-                        //                unfocusedContainerColor = Color.Transparent,
-                        //                disabledContainerColor = Color.Transparent,
-                        //                focusedIndicatorColor = Color.Unspecified,
-                        //                unfocusedIndicatorColor = Color.Unspecified,
-                        //                disabledIndicatorColor = Color.Unspecified,
-                        unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                               unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                     ),
                     keyboardOptions = KeyboardOptions(
                         imeAction = ImeAction.Next
@@ -125,12 +113,7 @@ fun ExtractedInformationPicker(
                         )
                     },
                     colors = TextFieldDefaults.colors(
-                        //                focusedContainerColor = Color.Transparent,
-                        //                unfocusedContainerColor = Color.Transparent,
-                        //                disabledContainerColor = Color.Transparent,
-                        //                focusedIndicatorColor = Color.Unspecified,
-                        //                unfocusedIndicatorColor = Color.Unspecified,
-                        //                disabledIndicatorColor = Color.Unspecified,
+
                         unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                     ),
                     keyboardOptions = KeyboardOptions(
@@ -154,12 +137,6 @@ fun ExtractedInformationPicker(
                         Text(text = "total", fontSize = MaterialTheme.typography.bodySmall.fontSize)
                     },
                     colors = TextFieldDefaults.colors(
-                        //                focusedContainerColor = Color.Transparent,
-                        //                unfocusedContainerColor = Color.Transparent,
-                        //                disabledContainerColor = Color.Transparent,
-                        //                focusedIndicatorColor = Color.Unspecified,
-                        //                unfocusedIndicatorColor = Color.Unspecified,
-                        //                disabledIndicatorColor = Color.Unspecified,
                         unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                     ), keyboardOptions = KeyboardOptions(
                         imeAction = ImeAction.Next
@@ -177,7 +154,6 @@ fun ExtractedInformationPicker(
             }
         Row(
             modifier = Modifier
-                //            .padding(8.dp)
                 .background(Color.White),
             verticalAlignment = Alignment.CenterVertically
         ) {
