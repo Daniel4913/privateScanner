@@ -28,8 +28,8 @@ class MainActivity : ComponentActivity() {
                         chosenImage = billImageState.image.firstOrNull(),
                         onImageSelect = { viewModel.addImage(it) },
                         onMenuClicked = {},
-                        recognitionResult = { viewModel.addText(it) },
-                        ) { billImageState.imageText.value }
+
+                        )
                 }
             }
         }
