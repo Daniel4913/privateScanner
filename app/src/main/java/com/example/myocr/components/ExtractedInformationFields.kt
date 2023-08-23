@@ -18,25 +18,36 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.myocr.mlkit.GraphicOverlay
 
 @Composable
-fun ExtractedInformationFields(name: String) {
+fun ExtractedInformationFields(
+    name: String,
+    quantity: String,
+    price: String,
+    quantityTimesPrice: String,
+    nameFocused: Boolean,
+    quantityFocused: Boolean,
+    priceFocused: Boolean,
+    quantityTimesPriceFocused: Boolean,
+) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             ExtractedInformationPicker(
-                isSelected = false,
                 onClick = { },
                 name = name,
-                onNameChanged = {
-
-                },
-                quantity = "",
+                onNameChanged = {},
+                quantity = quantity,
                 onQuantityChanged = {},
-                price = "",
+                price = price,
                 onPriceChanged = {},
-                quantityTimesPrice = "",
+                quantityTimesPrice = quantityTimesPrice,
                 onQuantityTimesPriceChanged = {},
-            )
+                nameFocused = {},
+                quantityFocused = {},
+                priceFocused = {},
+                quantityTimesPriceFocused = {},
+
+                )
         }
     }
 }

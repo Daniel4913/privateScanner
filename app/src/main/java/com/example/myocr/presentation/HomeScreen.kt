@@ -78,6 +78,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.myocr.components.ExtractedInformationFields
+import com.example.myocr.components.ExtractedInformationPicker
 import com.example.myocr.components.GraphicManager
 import com.example.myocr.components.ImageData
 import com.example.myocr.components.TextRecognitionOverlay
@@ -100,6 +101,17 @@ fun HomeScreen(
     // tooltip - do wyjebania
     val tooltipState = remember { PlainTooltipState() }
     val scope = rememberCoroutineScope()
+
+    var name by remember { mutableStateOf("") }
+    var quantity by remember { mutableStateOf("") }
+    var price by remember { mutableStateOf("") }
+    var quantityTimesPrice by remember { mutableStateOf("") }
+
+    //states for extract picker
+    var isNameFieldFocused by remember { mutableStateOf(false) }
+    var isQuantityFieldFocused by remember { mutableStateOf(false) }
+    var isPriceFieldFocused by remember { mutableStateOf(false) }
+    var isQuantityTimesPriceFieldFocused by remember { mutableStateOf(false) }
 
     val filePicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
@@ -160,7 +172,7 @@ fun HomeScreen(
             }
         },
         content = {
-            var name by remember { mutableStateOf("") }
+
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -175,13 +187,46 @@ fun HomeScreen(
                         TextRecognitionOverlay(
                             chosenImage = chosenImage,
                             clickedText = { clickedText ->
-                                name = clickedText
+                                when {
+                                    isNameFieldFocused -> name = clickedText
+                                    isQuantityFieldFocused -> quantity = clickedText
+                                    isPriceFieldFocused -> price = clickedText
+                                    isQuantityTimesPriceFieldFocused -> quantityTimesPrice =
+                                        clickedText
+                                }
+
                             })
                     } else {
 
                     }
                 }
-                ExtractedInformationFields(name)
+
+                ExtractedInformationPicker(
+                    onClick = { /*TODO*/ },
+                    name = name,
+                    onNameChanged = {},
+                    quantity = quantity,
+                    onQuantityChanged = {},
+                    price = price,
+                    onPriceChanged = {},
+                    quantityTimesPrice = quantityTimesPrice,
+                    onQuantityTimesPriceChanged = {},
+                    nameFocused = { isFocused -> isNameFieldFocused = isFocused },
+                    quantityFocused = { isFocused -> isQuantityFieldFocused = isFocused },
+                    priceFocused = { isFocused -> isPriceFieldFocused = isFocused },
+                    quantityTimesPriceFocused = { isFocused ->
+                        isQuantityTimesPriceFieldFocused = isFocused
+                    }
+                )
+//                ExtractedInformationFields(name,
+//                    quantity = "mnesarchum",
+//                    price = "quidam",
+//                    quantityTimesPrice = "omittam",
+//                    nameFocused = false,
+//                    quantityFocused = false,
+//                    priceFocused = false,
+//                    quantityTimesPriceFocused = false,
+//                )
 
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
@@ -194,23 +239,6 @@ fun HomeScreen(
                             color = Color.White
                         )
                     }
-
-                    //
-
-//            Column(
-//                modifier = Modifier
-//                    .verticalScroll(scrollState)
-//                    .fillMaxSize()
-//                    .padding(top = it.calculateTopPadding()),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//                if (chosenImage != null) {
-//                    TextRecognitionOverlay(chosenImage = chosenImage)
-//                }
-//                ExtractedInformationFields()
-//            }
-
-
                 }
             }
         }
